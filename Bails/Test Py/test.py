@@ -1,4 +1,5 @@
 import pygame
+import random
 pygame.init()
 
 #variables couleurs
@@ -16,6 +17,10 @@ pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load('cosmos.jpg')
 pygame.display.set_icon(icon)
 
+#fond
+background = pygame.image.load('background.jpg')
+
+
 #joueur
 playerIMG = pygame.image.load('ally.png')
 playerX =  370
@@ -25,9 +30,10 @@ playerX_change = 0
 
 #enemy
 enemyIMG = pygame.image.load('enemy.png')
-enemyX = 370
-enemyY = 30
-enemyX_change = 0
+enemyX = random.randint(0, 770)
+enemyY = random.randint(0, 770)
+enemyX_change = 1
+enemyY_change = 40
 
 
 def player(x, y):
@@ -41,6 +47,7 @@ running = True
 while running:
     
     screen.fill(Black)
+    screen.blit(background, (0, 0))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -56,13 +63,25 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
                 
-                
+    #player mouvement           
     playerX += playerX_change
     
     if playerX <= 0:
         playerX = 0
     if playerX >= 736:
         playerX = 736
+    
+    #enemy mouvement
+    enemyX += enemyX_change
+    
+    if enemyX <= 0:
+        enemyX_change = 1
+        enemyY += enemyY_change
+    elif enemyX >= 736:
+        enemyX_change = -1
+        enemyY += enemyY_change
+        
+    
     player(playerX, playerY)
     enemy(enemyX, enemyY)
     pygame.display.update()
