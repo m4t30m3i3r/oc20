@@ -4,7 +4,7 @@ import math, sys, os
 pygame.init()
 
 #variables couleurs
-White = (255, 255, 255)
+WHITE = (255, 255, 255)
 RED = (255, 0 , 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
@@ -30,13 +30,13 @@ size = (0, 0)
 drawing = False
 rect_list = []
 RECT_COLOR = RED
-key_dict_RECT_COLOR = {K_r:'RED', K_g:'GREEN', K_b:'BLUE'}
+key_dict_RECT_COLOR = {K_r:'RED', K_g:'GREEN', K_b:'BLUE', K_w:'WHITE'}
 key_dict_RECT_WIDTH = {K_0:0, K_1:1, K_2:2, K_3:3, K_4:4, K_5:5, K_6:6, K_7:7, K_8:8, K_9:9}
 RECT_WIDTH = 1
 
 #polygone
 points = []
-key_dict_POLYGON_COLOR = {K_r:'RED', K_g:'GREEN', K_b:'BLUE'}
+key_dict_POLYGON_COLOR = {K_r:'RED', K_g:'GREEN', K_b:'BLUE', K_w:'WHITE'}
 key_dict_POLYGON_WIDTH = {K_0:0, K_1:1, K_2:2, K_3:3, K_4:4, K_5:5, K_6:6, K_7:7, K_8:8, K_9:9}
 POLYGON_COLOR = RED
 POLYGON_WIDTH = 2
