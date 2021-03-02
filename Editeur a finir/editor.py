@@ -3,6 +3,15 @@ from pygame.locals import *
 import math, sys, os
 pygame.init()
 
+
+
+#test un bail
+birdPNG = pygame.image.load('help.png')
+
+def Help():
+    screen.blit(birdPNG, (0, 0))
+
+
 #variables couleurs
 WHITE = (255, 255, 255)
 RED = (255, 0 , 0)
@@ -47,7 +56,6 @@ POLYGON_WIDTH = 2
 #boucle editeur
 running = True
 while running:
-    
     screen.fill(ScreenBackground)
     
     for event in pygame.event.get():
@@ -57,6 +65,9 @@ while running:
         if event.type == KEYDOWN:
             if event.key in key_dict1:
                 forme = key_dict1[event.key]
+                
+        if pygame.key.get_pressed() [pygame.K_x] == True:
+            Help()    
 
 ######################################################################################################
 
