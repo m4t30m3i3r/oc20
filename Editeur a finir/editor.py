@@ -9,7 +9,7 @@ pygame.init()
 birdPNG = pygame.image.load('help.png')
 
 def Help():
-    screen.blit(birdPNG, (0, 0))
+    screen2.blit(birdPNG, (0, 0))
 
 
 #variables couleurs
@@ -27,6 +27,7 @@ forme = 'rectangle'
 
 #crée l'écran
 screen = pygame.display.set_mode([800, 600])
+screen2 = pygame.display.set_mode([800, 600])
 
 #Titre et icone
 pygame.display.set_caption("Editeur")
