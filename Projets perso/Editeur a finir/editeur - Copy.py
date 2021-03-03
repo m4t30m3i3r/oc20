@@ -13,7 +13,7 @@ ScreenBackground = BLACK
 
 
 #key dict pour savoir quelle forme faire
-key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_m:'polygone', K_n:'image'}
+key_dict1 = {K_p:'rectangle', K_l:'ellipse', K_m:'polygone', K_n:'image', K_f:'testIMG'}
 forme = 'début'
 
 #crée l'écran
@@ -51,24 +51,37 @@ POLYGON_COLOR = RED
 POLYGON_WIDTH = 2
 
 #image
-module = sys.modules['__main__']
-path, name = os.path.split(module.__file__)
-path = os.path.join(path, 'bird.png')
-img0 = pygame.image.load('bird.png')
-img0.convert()
-rect0 = img0.get_rect()
-center = 800//2, 600//2
-img = img0
-rect = img.get_rect()
-rect.center = center
-angle = 0
-scale = 1
+# module = sys.modules['__main__']
+# path, name = os.path.split(module.__file__)
+# path = os.path.join(path, 'bird.png')
+# img0 = pygame.image.load('bird.png')
+# img0.convert()
+# rect0 = img0.get_rect()
+# center = 800//2, 600//2
+# img = img0
+# rect = img.get_rect()
+# rect.center = center
+# angle = 0
+# scale = 1
+
+
+
+
+#testIMG
+movingIMG = pygame.image.load('bird.png')
+movingIMG_X_change = 0
+movingIMG_Y_change = 0
+movingIMG_X =  0
+movingIMG_Y = 0
+def movingIMG_f(x, y):
+    screen.blit(movingIMG, (movingIMG_X, movingIMG_Y))
+
 
 
 #boucle editeur
 running = True
 while running:
-    
+     
     screen.fill(ScreenBackground)
     
     for event in pygame.event.get():
@@ -145,64 +158,90 @@ while running:
 
 
     #####################################################################################################
-        if forme == 'image':
-            
-            mouse = pygame.mouse.get_pos()
-            pygame.draw.line(screen, GREEN, center, mouse, 1)
-            if event.type == KEYDOWN:
-                if event.key == K_r:
-                    if event.mod & KMOD_SHIFT:
-                        angle -= 10
-                    else:
-                        angle += 10
-                    img = pygame.transform.rotozoom(img0, angle, scale)
-
-                elif event.key == K_s:
-                    if event.mod & KMOD_SHIFT:
-                        scale /= 1.1
-                    else:
-                        scale *= 1.1
-                    img = pygame.transform.rotozoom(img0, angle, scale)
-
-                elif event.key == K_o:
-                    img = img0
-                    angle = 0
-                    scale = 1
-
-                elif event.key == K_h:
-                    img = pygame.transform.flip(img, True, False)
-            
-                elif event.key == K_v:
-                    img = pygame.transform.flip(img, False, True)
-
-                elif event.key == K_l:
-                    img = pygame.transform.laplacian(img)
-
-                elif event.key == K_2:
-                    img = pygame.transform.scale2x(img)
-
-                rect = img.get_rect()
-                rect.center = center
-
-            elif event.type == MOUSEMOTION:
-                mouse = event.pos
-                x = mouse[0] - center[0]
-                y = mouse[1] - center[1]
-                d = math.sqrt(x ** 2 + y ** 2)
-
-                angle = math.degrees(-math.atan2(y, x))
-                scale = abs(5 * d / 800)
-                img = pygame.transform.rotozoom(img0, angle, scale)
-                rect = img.get_rect()
-                rect.center = center
-            pygame.draw.rect(img0, GREEN, rect0, 1)
-            screen.blit(img, rect)
-            pygame.draw.rect(screen, RED, rect, 1)
-            pygame.draw.circle(screen, RED, center, 6, 1)
-            pygame.draw.circle(screen, RED, mouse, 6, 1)
-            pygame.display.update()
+#         if forme == 'image':
+#             
+#             mouse = pygame.mouse.get_pos()
+#             pygame.draw.line(screen, GREEN, center, mouse, 1)
+#             if event.type == KEYDOWN:
+#                 if event.key == K_r:
+#                     if event.mod & KMOD_SHIFT:
+#                         angle -= 10
+#                     else:
+#                         angle += 10
+#                     img = pygame.transform.rotozoom(img0, angle, scale)
+# 
+#                 elif event.key == K_s:
+#                     if event.mod & KMOD_SHIFT:
+#                         scale /= 1.1
+#                     else:
+#                         scale *= 1.1
+#                     img = pygame.transform.rotozoom(img0, angle, scale)
+# 
+#                 elif event.key == K_o:
+#                     img = img0
+#                     angle = 0
+#                     scale = 1
+# 
+#                 elif event.key == K_h:
+#                     img = pygame.transform.flip(img, True, False)
+#             
+#                 elif event.key == K_v:
+#                     img = pygame.transform.flip(img, False, True)
+# 
+#                 elif event.key == K_l:
+#                     img = pygame.transform.laplacian(img)
+# 
+#                 elif event.key == K_2:
+#                     img = pygame.transform.scale2x(img)
+# 
+#                 rect = img.get_rect()
+#                 rect.center = center
+# 
+#             elif event.type == MOUSEMOTION:
+#                 mouse = event.pos
+#                 x = mouse[0] - center[0]
+#                 y = mouse[1] - center[1]
+#                 d = math.sqrt(x ** 2 + y ** 2)
+# 
+#                 angle = math.degrees(-math.atan2(y, x))
+#                 scale = abs(5 * d / 800)
+#                 img = pygame.transform.rotozoom(img0, angle, scale)
+#                 rect = img.get_rect()
+#                 rect.center = center
+#             pygame.draw.rect(img0, GREEN, rect0, 1)
+#             screen.blit(img, rect)
+#             pygame.draw.rect(screen, RED, rect, 1)
+#             pygame.draw.circle(screen, RED, center, 6, 1)
+#             pygame.draw.circle(screen, RED, mouse, 6, 1)
+#             pygame.display.update()
    
+###############################################################################################################################   
+   
+   
+        if forme == 'testIMG':
+        
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    movingIMG_X_change = -1
+                if event.key == pygame.K_RIGHT:
+                    movingIMG_X_change = +1
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    movingIMG_X_change = 0
+     
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    movingIMG_Y_change = -1
+                if event.key == pygame.K_DOWN:
+                    movingIMG_Y_change = +1
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    movingIMG_Y_change = 0
     
+    movingIMG_X += movingIMG_X_change
+    movingIMG_Y += movingIMG_Y_change   
+
+#############################################################################################################################
     for rect in rect_list:
         rect.draw()
     
@@ -210,7 +249,7 @@ while running:
         rect = pygame.draw.lines(screen, POLYGON_COLOR, True, points, POLYGON_WIDTH)
         pygame.draw.rect(screen, GREEN, rect, POLYGON_WIDTH)
         pygame.display.update()
-
+    movingIMG_f(0, 0)
     pygame.display.update()
     
 pygame.quit()
