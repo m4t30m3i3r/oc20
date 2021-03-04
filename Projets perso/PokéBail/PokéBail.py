@@ -18,7 +18,7 @@ background = pygame.image.load('background.jpg')
 
 #Titre et icone
 pygame.display.set_caption("pokemon")
-icon = pygame.image.load('pokeball.jpg')
+icon = pygame.image.load('pokeball.png')
 pygame.display.set_icon(icon)
 
 #joueur

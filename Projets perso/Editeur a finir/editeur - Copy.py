@@ -71,8 +71,7 @@ POLYGON_WIDTH = 2
 movingIMG = pygame.image.load('bird.png')
 movingIMG_X_change = 0
 movingIMG_Y_change = 0
-movingIMG_X =  0
-movingIMG_Y = 0
+movingIMG_X, movingIMG_Y = pygame.mouse.get_pos()
 def movingIMG_f(x, y):
     screen.blit(movingIMG, (movingIMG_X, movingIMG_Y))
 
@@ -237,10 +236,19 @@ while running:
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     movingIMG_Y_change = 0
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    movingIMG_Y_change = -2
+                    pygame.time.wait(200)
+                    movingIMG_Y_change = 2
+            
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                    movingIMG_Y_change = 0
     
     movingIMG_X += movingIMG_X_change
-    movingIMG_Y += movingIMG_Y_change   
-
+    movingIMG_Y += movingIMG_Y_change
 #############################################################################################################################
     for rect in rect_list:
         rect.draw()
