@@ -79,7 +79,6 @@ while running:
     if playerY >= screenY - 64:
         playerY = screenY - 64
     
-    
     player(playerX, playerY)
     pygame.display.update()
 
