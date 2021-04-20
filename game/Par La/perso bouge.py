@@ -4,7 +4,7 @@ from pygame.locals import *
 
 
 # define display surface            
-W, H = 1920, 1080
+W, H = 1000, 1000
 HW, HH = W / 2, H / 2
 AREA = W * H
 
@@ -19,7 +19,7 @@ pygame.init()
 CLOCK = pygame.time.Clock()
 DS = pygame.display.set_mode((W, H))
 pygame.display.set_caption("spritesheet.png")
-FPS = 2
+FPS = 8
 
 # define some colors
 BLACK = (0, 0, 0, 255)
@@ -52,30 +52,71 @@ s = spritesheet("spritesheet.png", 4, 4)
 CENTER_HANDLE = 4
 
 index = 0
-
+i = 0
 # main loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            
+#droite-gauche ------------------------------------------------------------------------------------------------
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 playerX_change = -10
-                index = 4
+       
             if event.key == pygame.K_RIGHT:
                 playerX_change = +10
-                index = 8
+                
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
-                
+        
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                index = 4
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                index = 8
+#haut-bas-----------------------------------------------------------------------------------------------------------------           
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                playerY_change = -10
+       
+            if event.key == pygame.K_DOWN:
+                playerY_change = +10
+               
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                playerY_change = 0
+        
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                index = 12
+        
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_DOWN:
+                index = 0   
+     
+     
     s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
-    index += 1
-    
-    #pygame.draw.circle(DS, WHITE, (int(HW), int(HH)), 2, 0)
     playerX += playerX_change
     playerY += playerY_change
+    
+    if pygame.key.get_pressed() [pygame.K_LEFT] == True:
+        i += 1
+        index = 4 + i % 4
+        
+    if pygame.key.get_pressed() [pygame.K_RIGHT] == True:
+        i += 1
+        index = 8 + i % 4
+
+    if pygame.key.get_pressed() [pygame.K_DOWN] == True:
+        i += 1
+        index = 0 + i % 4
+        
+    if pygame.key.get_pressed() [pygame.K_UP] == True:
+        i += 1
+        index = 12 + i % 4
+        
     pygame.display.update()
     CLOCK.tick(FPS)
     DS.fill(BLACK)
