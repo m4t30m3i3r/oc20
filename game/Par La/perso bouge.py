@@ -27,14 +27,22 @@ CLOCK = pygame.time.Clock()
 DS = pygame.display.set_mode((W, H))
 FPS = 8
 
+#obstacle test
+obstacle = pygame.image.load('obstacle.png').convert_alpha()
+obstacle_mask = pygame.mask.from_surface(obstacle)
+obstacleX = 100
+obstacleY = 100
+obstacle_rect = obstacle.get_rect()
+
 # define some colors
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 
 class spritesheet:
     def __init__(self, filename, cols, rows):
-        self.sheet = pygame.image.load(filename).convert_alpha()
-        
+        self.filename =filename
+        self.sheet = pygame.image.load(self.filename).convert_alpha()
+        self.mask = pygame.mask.from_surface(self.sheet)
         self.cols = cols
         self.rows = rows
         self.totalCellCount = cols * rows
@@ -53,7 +61,7 @@ class spritesheet:
     def draw(self, surface, cellIndex, x, y, handle = 0):
         surface.blit(self.sheet, (x + self.handle[handle][0], y + self.handle[handle][1]), self.cells[cellIndex])
 
-s = spritesheet("spritesheet.png", 4, 4)
+s = spritesheet('spritesheet.png', 4, 4)
 
 CENTER_HANDLE = 4
 
@@ -65,6 +73,8 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+
 #droite-gauche ------------------------------------------------------------------------------------------------
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -104,9 +114,9 @@ while True:
                 index = 0   
      
      
-    s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
-    playerX += playerX_change
-    playerY += playerY_change
+#     s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
+#     playerX += playerX_change
+#     playerY += playerY_change
     
     if pygame.key.get_pressed() [pygame.K_LEFT] == True:
         i += 1
@@ -123,7 +133,22 @@ while True:
     if pygame.key.get_pressed() [pygame.K_UP] == True:
         i += 1
         index = 12 + i % 4
-        
+#test obstacle
+    offset = (int(playerX - obstacleX), int(playerY - obstacleX))
+    result = s.mask.overlap(obstacle_mask, offset)
+    if result:
+        print('carré fraté')
+        pass
+    else:
+        print('pas dessus')
+        pass
+
+
+ 
+    DS.blit(obstacle, (obstacleX, obstacleY))
+    s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
+    playerX += playerX_change
+    playerY += playerY_change
     pygame.display.update()
     CLOCK.tick(FPS)
     DS.fill(BLACK)
