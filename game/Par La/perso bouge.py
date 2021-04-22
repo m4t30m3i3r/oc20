@@ -2,6 +2,13 @@ import math, random, sys
 import pygame
 from pygame.locals import *
 
+#background
+background = pygame.image.load('background.jpg')
+
+#Titre et icone
+pygame.display.set_caption("pokemon")
+icon = pygame.image.load('pokeball.png')
+pygame.display.set_icon(icon)
 
 # define display surface            
 W, H = 1000, 1000
@@ -18,7 +25,6 @@ playerY_change = 0
 pygame.init()
 CLOCK = pygame.time.Clock()
 DS = pygame.display.set_mode((W, H))
-pygame.display.set_caption("spritesheet.png")
 FPS = 8
 
 # define some colors
@@ -55,6 +61,7 @@ index = 0
 i = 0
 # main loop
 while True:
+    DS.blit(background, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
