@@ -28,11 +28,19 @@ DS = pygame.display.set_mode((W, H))
 FPS = 8
 
 #obstacle test
-obstacle = pygame.image.load('obstacle.png').convert_alpha()
-obstacle_mask = pygame.mask.from_surface(obstacle)
+obstacle1 = pygame.image.load('obstacle1.png').convert_alpha()
 obstacleX = 100
-obstacleY = 100
-obstacle_rect = obstacle.get_rect()
+obstacleY = 700
+obstacle_mask1 = pygame.mask.from_surface(obstacle1)
+
+print(type(obstacle_mask1))
+print(obstacle_mask1.get_rect())
+
+#carré blanc qui suit joueur
+carré_white = pygame.image.load('test_obstacle.jpg').convert_alpha()
+carré_white_mask = pygame.mask.from_surface(carré_white)
+carré_whiteX = playerX
+carré_whiteY = playerY
 
 # define some colors
 BLACK = (0, 0, 0, 255)
@@ -69,7 +77,7 @@ index = 0
 i = 0
 # main loop
 while True:
-    DS.blit(background, (0, 0))
+    #DS.blit(background, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -134,18 +142,33 @@ while True:
         i += 1
         index = 12 + i % 4
 #test obstacle
-    offset = (int(playerX - obstacleX), int(playerY - obstacleX))
-    result = s.mask.overlap(obstacle_mask, offset)
+    offset = (int((playerX-19) - obstacleX), int((playerY- 20) - obstacleY))
+    result = obstacle_mask1.overlap(carré_white_mask, offset)
+    #print(playerX, playerY, obstacleX, obstacleY, offset, sep='\t')
     if result:
-        print('carré fraté')
+        #print('carré fraté')
+        if playerX_change > 0:
+            playerX_change = 0
+            playerX -= 10
+        if playerX_change < 0:
+            playerX_change = 0
+            playerX += 10
+        if playerY_change > 0:
+            playerYchange = 0
+            playerY -= 15
+        if playerY_change < 0:
+            playerY_change = 0
+            playerY += 10
+            
         pass
     else:
-        print('pas dessus')
         pass
+#         print('pas dessus')
+#         print(playerY_change)
 
-
- 
-    DS.blit(obstacle, (obstacleX, obstacleY))
+    DS.blit(carré_white, (playerX - 19, playerY- 20))
+    DS.blit(background, (0, 0))
+    DS.blit(obstacle1, (obstacleX, obstacleY))
     s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
     playerX += playerX_change
     playerY += playerY_change

@@ -13,6 +13,9 @@ Black = (0, 0, 0)
 #crée l'écran
 screenX = 800
 screenY = 600
+HW = screenX/2
+HH = screenY/2
+screenY = 600
 screen = pygame.display.set_mode([screenX, screenY])
 
 #Titre et icone
@@ -24,15 +27,24 @@ pygame.display.set_icon(icon)
 background = pygame.image.load('background.jpg')
 
 
-#joueur
-playerIMG = pygame.image.load('ally.png')
-playerX =  screenX/2 - 32
-playerY = screenY/1.25
-playerX_change = 0
+#obstacle test
+obstacle = pygame.image.load('obstacle.png').convert_alpha()
+obstacle_mask = pygame.mask.from_surface(obstacle)
+obstacle_rect = obstacle.get_rect()
+obstacleX = HW - obstacle_rect.center[0]
+obstacleY = HH - obstacle_rect.center[1]
 
+
+
+#joueur
+playerIMG = pygame.image.load('ally.png').convert_alpha()
+playerX =  screenX/2 - 32
+playerY = screenY/2
+playerX_change = 0
+player_mask = pygame.mask.from_surface(playerIMG)
 
 #enemy
-enemyIMG = pygame.image.load('enemy.png')
+enemyIMG = pygame.image.load('enemy.png').convert_alpha()
 enemyX = random.randint(0, screenX - 64)
 enemyY = random.randint(0, screenY - 300)
 enemyX_change = 1
@@ -51,7 +63,7 @@ while running:
     
     screen.fill(Black)
     screen.blit(background, (0, 0))
-    
+    mx, my = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -65,7 +77,17 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
-                
+
+
+    offset = (int(mx - obstacleX), int(my - obstacleX))
+    result = player_mask.overlap(obstacle_mask, offset)
+    print(playerX, playerY, obstacleX, obstacleY, offset, sep='\t')
+    if result:
+        print('carré fraté')
+        pass
+    else:
+        print('pas dessus')
+        pass
     #player mouvement           
     playerX += playerX_change
     
@@ -84,7 +106,7 @@ while running:
         enemyX_change = -1
         enemyY += enemyY_change
         
-    
+    screen.blit(obstacle, (obstacleX, obstacleY))
     player(playerX, playerY)
     enemy(enemyX, enemyY)
     pygame.display.update()
