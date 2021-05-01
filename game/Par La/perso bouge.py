@@ -154,8 +154,8 @@ while True:
             playerX_change = 0
             playerX += 10
         if playerY_change > 0:
-            playerYchange = 0
-            playerY -= 15
+            playerY_change = 0
+            playerY -= 10
         if playerY_change < 0:
             playerY_change = 0
             playerY += 10
