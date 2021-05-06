@@ -16,6 +16,7 @@ while running:
 
     DS.blit(carré_white, (joueur.playerX - 19, joueur.playerY- 20))
     joueur.draw(DS, joueur.index % joueur.totalCellCount, joueur.playerX, joueur.playerY, CENTER_HANDLE)
+    joueur.deplacer(event)
     obstacle1 = obstacle('obstacle1.png', 100, 700)
     obstacle1.draw(DS)
     obstacle1.collision(joueur.playerX, joueur.playerY)

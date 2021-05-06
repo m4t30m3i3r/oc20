@@ -1,16 +1,17 @@
 import random
 import pygame
 from pygame.locals import *
+#from mainfile import *
 
 W, H = 1000, 1000
 HW, HH = W / 2, H / 2
 AREA = W * H
-
+DS = pygame.display.set_mode((W, H))
 #####
+# carré_whiteX = joueur.playerX
+# carré_whiteY = joueur.playerY
 carré_white = pygame.image.load('test_obstacle.jpg').convert_alpha()
 carré_white_mask = pygame.mask.from_surface(carré_white)
-carré_whiteX = joueur.playerX
-carré_whiteY = joueur.playerY
 #####
 
 

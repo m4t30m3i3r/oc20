@@ -48,3 +48,5 @@ liste_types = ['Normal', 'Feu', 'Eau', 'Plante', 'Electrik',
                'Psy', 'Insecte', 'Roche', 'Spectre', 'Dragon',
                'Ténèbres', 'Acier']
 
+# carré_white = pygame.image.load('test_obstacle.jpg').convert_alpha()
+# carré_white_mask = pygame.mask.from_surface(carré_white)
