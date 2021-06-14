@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 
 #background
-background = pygame.image.load('parla2.png')
+background = pygame.image.load('parla3.png')
 
 #Titre et icone
 pygame.display.set_caption("pokemon")
