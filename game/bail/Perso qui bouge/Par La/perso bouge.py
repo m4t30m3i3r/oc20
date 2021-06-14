@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 
 #background
-background = pygame.image.load('background.jpg')
+background = pygame.image.load('parla2.png')
 
 #Titre et icone
 pygame.display.set_caption("pokemon")
@@ -166,10 +166,10 @@ while True:
 #         print('pas dessus')
 #         print(playerY_change)
 
-    DS.blit(carré_white, (playerX - 19, playerY- 20))
-    DS.blit(background, (0, 0))
+    DS.blit(carré_white, (500 - 19, 500 - 20))
+    DS.blit(background, (playerX, playerY))
     DS.blit(obstacle1, (obstacleX, obstacleY))
-    s.draw(DS, index % s.totalCellCount, playerX, playerY, CENTER_HANDLE)
+    s.draw(DS, index % s.totalCellCount, 500, 500, CENTER_HANDLE)
     playerX += playerX_change
     playerY += playerY_change
     pygame.display.update()
